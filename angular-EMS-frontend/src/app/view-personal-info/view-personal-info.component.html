@@ -1,0 +1,45 @@
+<h3> View Employee Details</h3>
+<div class="employeeDetails">
+    <div>
+        <label> <b> Employee Id: </b></label> {{employee.eid}}
+    </div>
+    <div>
+        <label> <b> First Name: </b></label> {{employee.firstname}}
+    </div>
+    <div>
+        <label> <b> Last Name: </b></label> {{employee.lastname}}
+    </div>
+    <div>
+        <label> <b> Email Id: </b></label> {{employee.email}}
+    </div>
+    <div>
+        <label> <b> Gender: </b></label> {{employee.gender}}
+    </div>
+    <div>
+        <label> <b> Designation: </b></label> {{employee.desg}}
+    </div>
+    <div>
+        <label> <b> Department: </b></label> {{employee.dpt}}
+    </div>
+    <div>
+        <label> <b> Manager: </b></label> {{employee.manager}}
+        <label> <b> Manager ID: </b></label> {{employee.managerID}}
+    </div>
+    <div>
+        <label> <b> Location: </b></label> {{employee.location}}
+    </div>
+    <div>
+        <label> <b> Salary: </b></label> {{employee.salary}}
+    </div>
+</div>
+
+<h3> View Personal Details</h3>
+<div class="personal">
+    <div>
+        <label> <b> Address: </b></label> {{personalInfo.address}}
+    </div>
+    <div>
+        <label> <b> Contact: </b></label> {{personalInfo.contact}}
+        <button (click) = "updatePersonalInfo(employee.eid)" class = "btn btn-info"> Update your personal Info</button>
+    </div>
+</div>
