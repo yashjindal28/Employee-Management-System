@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Employee Management System Auth Service")
+	fmt.Println("Employee Management System Auth Service Started ....")
 
 	router := mux.NewRouter()
 
