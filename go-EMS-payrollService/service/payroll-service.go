@@ -56,7 +56,7 @@ func CalSalaryAndMail(eid string) {
 	salary, _ := strconv.ParseFloat(sal, 64)
 	salary = salary - (salary * 0.10)
 	salary = (salary / 12)
-	fmt.Println(salary)
+	//fmt.Println(salary)
 	mail(email, salary)
 }
 
@@ -64,7 +64,7 @@ func mail(email string, salary float64) {
 	// Sender data.
 	from := "alertnotificationB14@gmail.com"
 	password := "kletseuhftcpasmv"
-
+	fmt.Println("Inside")
 	// Receiver email address.
 	to := []string{
 		email,

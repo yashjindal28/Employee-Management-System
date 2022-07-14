@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/yashjindal28/go-EMS-payrollService/model"
@@ -35,7 +34,7 @@ func IssuePaycheckEndpoint(response http.ResponseWriter, request *http.Request) 
 
 	params := mux.Vars(request)
 	eid := params["childEid"]
-	fmt.Println(eid)
+	//fmt.Println(eid)
 	service.CalSalaryAndMail(eid)
 
 	//json.NewEncoder(response).Encode(employees)
