@@ -1,5 +1,5 @@
 # set base image (host os)
-FROM golang:1.18.3-alpine
+FROM golang:1.18.3-alpine AS builder
 
 #set the working directory in the container
 WORKDIR /app
@@ -14,9 +14,13 @@ RUN go mod download
 COPY . .
 
 #command to run on container start
-RUN go build -o /main 
+RUN go build -o main main.go
+
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /app/main .
 
 EXPOSE 82
-ENTRYPOINT [ "/main" ]
+CMD [ "/app/main" ]
 
 

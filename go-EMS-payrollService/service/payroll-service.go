@@ -64,7 +64,8 @@ func mail(email string, salary float64) {
 	// Sender data.
 	from := "alertnotificationB14@gmail.com"
 	password := "kletseuhftcpasmv"
-	fmt.Println("Inside")
+	//
+	//fmt.Println("Inside")
 	// Receiver email address.
 	to := []string{
 		email,
