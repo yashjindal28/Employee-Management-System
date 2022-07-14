@@ -20,6 +20,6 @@ FROM alpine:latest
 COPY --from=builder /app .
 
 EXPOSE 81
-ENTRYPOINT [ "/main" ]
+ENTRYPOINT [ "./main" ]
 
 
