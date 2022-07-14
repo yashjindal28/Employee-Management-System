@@ -1,10 +1,10 @@
-name: deploy-auth
+name: deploy-department
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - "go-EMS-AuthService/**"
+      - "go-EMS-departmentService/**"
 
 jobs:
 
@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - run: cd go-EMS-AuthService  && docker build -t yashjindal28/go-ems-authservice . 
+    - run: cd go-EMS-departmentService  && docker build -t yashjindal28/go-ems-departmentservice . 
     - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
-    - run: docker push yashjindal28/go-ems-authservice
+    - run: docker push yashjindal28/go-ems-departmentservice
