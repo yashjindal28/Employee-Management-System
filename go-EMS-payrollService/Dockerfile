@@ -14,13 +14,13 @@ RUN go mod download
 COPY . .
 
 #command to run on container start
-RUN go build -o /main main.go
+RUN go build -o main main.go
 
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/main .
 
 EXPOSE 81
-ENTRYPOINT [ "/app/main" ]
+CMD [ "/app/main" ]
 
 
