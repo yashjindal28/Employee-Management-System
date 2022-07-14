@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 #command to run on container start
-RUN go build -o /main 
+RUN go build -o /main main.go
 
 FROM alpine:latest
 WORKDIR /app
