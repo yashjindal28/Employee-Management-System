@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
-    - host: ems.dev
+    - #host: ems.dev
       http:
         paths:
           - path: /?(.*)

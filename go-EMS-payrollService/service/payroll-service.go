@@ -56,7 +56,7 @@ func CalSalaryAndMail(eid string) {
 	salary, _ := strconv.ParseFloat(sal, 64)
 	salary = salary - (salary * 0.10)
 	salary = (salary / 12)
-	//fmt.Println(salary)
+	fmt.Println(salary)
 	mail(email, salary)
 }
 
