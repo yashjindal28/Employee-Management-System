@@ -93,6 +93,7 @@ func CreateUserEndpoint(response http.ResponseWriter, request *http.Request) {
 			result := service.CreateUserByID(userInfo)
 			writeResponse(response, http.StatusOK, authorizedResponse())
 			json.NewEncoder(response).Encode(result)
+			fmt.Println("User Created")
 			// call service to create user in database
 		}
 
