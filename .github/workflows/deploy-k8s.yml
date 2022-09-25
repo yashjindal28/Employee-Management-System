@@ -29,7 +29,7 @@ jobs:
         aws-region: ap-south-1
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name employee-management-system --region ap-south-1
+      run: aws eks update-kubeconfig --name ems --region ap-south-1
 
     - name: Apply k8s files to eks cluster
       run: kubectl apply -f k8s && kubectl apply -f k8s-prod

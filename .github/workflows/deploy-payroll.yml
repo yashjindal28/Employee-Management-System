@@ -42,7 +42,7 @@ jobs:
       run: docker push yashjindal28/go-ems-payrollservice
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name employee-management-system --region ap-south-1
+      run: aws eks update-kubeconfig --name ems --region ap-south-1
 
     - name: Deploy image to Amazon EKS
       run:  kubectl rollout restart deployment payrollservice-deployment
