@@ -1,16 +1,16 @@
-name: deploy-frontend
+name: deploy-k8s
 
 on:
   push:
     branches: [ "master" ]
     paths:
-      - "angular-EMS-frontend/**"
+      - "k8s/**"
+      - "k8s-prod/**"
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Check out code
       uses: actions/checkout@v3
@@ -21,7 +21,6 @@ jobs:
         version: 'v1.21.3'
       id: install
 
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -29,16 +28,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
-    - run: cd angular-EMS-frontend  && docker build -t yashjindal28/angular-ems-frontend . 
-    - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
-
-    - run: docker push yashjindal28/angular-ems-frontend
-
     - name: Update kube config
       run: aws eks update-kubeconfig --name employee-management-system --region ap-south-1
 
-    - name: Deploy image to Amazon EKS
-      run:  kubectl rollout restart deployment angular-ems-frontend-deployment
+    - name: Apply k8s files to eks cluster
+      run: kubectl apply -f k8s && kubectl apply -f k8s-prod

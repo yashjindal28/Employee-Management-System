@@ -20,17 +20,22 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.authService.login(this.user).subscribe((data:any) => {
+      console.log(data.status)
 
-     this.authTokenService.setToken(data.jwtToken)
-     this.authTokenService.setDesg(data.desg)
-     this.authTokenService.setEmployeeID(this.user.eid)
-
-      const desg = data.desg
-      if(desg === "Manager" || desg ==="CEO"){
-        this.router.navigate(['manager'])
-      }else{
-        this.router.navigate(['employee'])
-      }
+      
+      this.authTokenService.setToken(data.jwtToken)
+      this.authTokenService.setDesg(data.desg)
+      this.authTokenService.setEmployeeID(this.user.eid)
+ 
+       const desg = data.desg
+       if(desg === "Manager" || desg ==="CEO"){
+         this.router.navigate(['manager'])
+       }else{
+         this.router.navigate(['employee'])
+       }
+      
+     
+     
     })
   }
   

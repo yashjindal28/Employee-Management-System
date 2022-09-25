@@ -33,4 +33,11 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD}}
+
     - run: docker push yashjindal28/go-ems-employeeservice
+
+    - name: Update kube config
+      run: aws eks update-kubeconfig --name employee-management-system --region ap-south-1
+
+    - name: Deploy image to Amazon EKS
+      run:  kubectl rollout restart deployment employeeservice-deployment
