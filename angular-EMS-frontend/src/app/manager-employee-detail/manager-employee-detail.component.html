@@ -1,35 +1,30 @@
-<h3> View Employee Details</h3>
-<div>
-    <div>
-        <label> <b> Employee Id: </b></label> {{employee.eid}}
-    </div>
-    <div>
-        <label> <b> First Name: </b></label> {{employee.firstname}}
-    </div>
-    <div>
-        <label> <b> Last Name: </b></label> {{employee.lastname}}
-    </div>
-    <div>
-        <label> <b> Email Id: </b></label> {{employee.email}}
-    </div>
-    <div>
-        <label> <b> Gender: </b></label> {{employee.gender}}
-    </div>
-    <div>
-        <label> <b> Designation: </b></label> {{employee.desg}}
-    </div>
-    <div>
-        <label> <b> Department ID: </b></label> {{employee.did}}
-        <label> <b> Department: </b></label> {{employee.dpt}}
-    </div>
-    <div>
-        <label> <b> Manager: </b></label> {{employee.manager}}
-        <label> <b> Manager ID: </b></label> {{employee.managerID}}
-    </div>
-    <div>
-        <label> <b> Location: </b></label> {{employee.location}}
-    </div>
-    <div>
-        <label> <b> Salary: </b></label> {{employee.salary}}
-    </div>
-</div>
+<h3> <b> Employment Details </b></h3>
+<table class = "table table-striped">
+    
+    <tbody>
+        <tr >
+            <td> <label> <b> Employee ID : </b></label> {{employee.eid}}  </td>
+            <td> <label><b> Employee Name : </b></label>  {{employee.firstname}} {{employee.lastname}} </td>
+            
+        </tr>
+        <tr  >
+            <td>  <label> <b> Email Id : </b></label> {{employee.email}} </td>
+            <td> <label> <b> Gender : </b></label> {{employee.gender}} </td>
+            
+        </tr>
+        <tr  >
+            <td> <label> <b> Department : </b></label> {{employee.dpt}} </td>
+            <td> <label> <b> Designation : </b></label> {{employee.desg}} </td>
+            
+        </tr>
+        <tr  >
+            <td> <label> <b> Manager Name : </b></label> {{employee.manager}} </td>
+            <td> <label> <b> Manager ID : </b></label> {{employee.managerID}} </td>
+        </tr>
+
+        <tr>
+            <td> <label> <b> Location : </b></label> {{employee.location}} </td>
+            <td> <label> <b> Salary  : </b></label> {{employee.salary}} </td>
+        </tr>
+    </tbody>
+</table>
