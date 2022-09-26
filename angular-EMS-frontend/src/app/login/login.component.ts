@@ -12,31 +12,39 @@ import { User } from '../employee';
 export class LoginComponent implements OnInit {
 
   user: User = new User()
+  wrongCred: boolean
   constructor(private authService: AuthService,
-    private router:Router , private authTokenService: AuthTokenService) { }
+    private router: Router, private authTokenService: AuthTokenService) { }
 
   ngOnInit(): void {
+    if (this.authTokenService.getWrong() === "true")
+        this.wrongCred = true
+    else
+        this.wrongCred = false
   }
 
-  login(){
-    this.authService.login(this.user).subscribe((data:any) => {
-      console.log(data.status)
-
-      
+  login() {
+    this.authService.login(this.user).subscribe((data: any) => {
       this.authTokenService.setToken(data.jwtToken)
       this.authTokenService.setDesg(data.desg)
       this.authTokenService.setEmployeeID(this.user.eid)
- 
-       const desg = data.desg
-       if(desg === "Manager" || desg ==="CEO"){
-         this.router.navigate(['manager'])
-       }else{
-         this.router.navigate(['employee'])
-       }
-      
-     
-     
-    })
+
+      const desg = data.desg
+      if (desg === "Manager" || desg === "CEO") {
+        this.router.navigate(['manager'])
+      } else {
+        this.router.navigate(['employee'])
+      }
+
+    }, error => this.wrong())
+
   }
-  
+
+  wrong(){
+    this.authTokenService.setWrong()
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['login'])
+  }
+
 }

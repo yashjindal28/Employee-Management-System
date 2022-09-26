@@ -49,4 +49,12 @@ export class AuthTokenService {
       return false
     }
   }
+
+  public setWrong(){
+    localStorage.setItem("wrongCred","true")
+  }
+
+  public getWrong(): string | null{
+    return localStorage.getItem('wrongCred')
+  }
 }
