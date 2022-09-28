@@ -144,4 +144,16 @@ export class EmployeeService {
   getCount(eid: string | null): Observable<Count> {
     return this.httpClient.get<Count>(`${this.baseURL6}/${eid}/${'get-count'}`)
   }
+
+  updateEmployeePayroll(eid:string | null , childEid: string, employee: Employee): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL5}/${eid}/${'update-employee'}/${childEid}`, employee);
+  }
+
+  updateEmployeeLeave(eid:string | null , childEid: string, employee: Employee): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL4}/${eid}/${'update-employee'}/${childEid}`, employee);
+  }
+
+  updateEmployeeDepartment(eid:string | null , childEid: string, employee: Employee): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL6}/${eid}/${'update-employee'}/${childEid}`, employee);
+  }
 }

@@ -16,6 +16,7 @@ func FindAll() (err error, err2 error, payrollData []model.PayrollData) {
 	// db.payrollInfo.updateOne({"eid":"005MCMP"},{$set:{"isCheckIssued":0}})
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
+	//cursor, err := repository.FindAllPayrollData()
 	cursor, err := repository.FindAllPayrollData()
 	for cursor.Next(ctx) {
 		var payInfo model.PayrollData
@@ -88,4 +89,11 @@ func mail(email string, salary float64) {
 		return
 	}
 	fmt.Println("Email Sent Successfully!")
+}
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.PayrollData) (result *mongo.UpdateResult, err error) {
+
+	result, err = repository.UpdateEmployeeByIdUnderManager(eid, employee)
+
+	return result, err
 }

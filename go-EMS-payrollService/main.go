@@ -18,6 +18,7 @@ func main() {
 	router.HandleFunc("/payroll/{eid}", controller.AllEmployeeEndpoint).Methods("GET").Name("GetPayrollDataForAllEmployess")
 	router.HandleFunc("/payroll/{eid}/add-info", controller.AddPayrollInfoEndpoint).Methods("POST").Name("AddPayrollInfo")
 	router.HandleFunc("/payroll/{eid}/delete-info/{childEid}", controller.DeletePayrollInfoForEmployeeEndpoint).Methods("DELETE").Name("DeleteEmployee")
+	router.HandleFunc("/payroll/{eid}/update-employee/{childEid}", controller.EditEmployeeEndpoint).Methods("PUT").Name("UpdateEmployee")
 	router.HandleFunc("/payroll/{eid}/issue/{childEid}", controller.IssuePaycheckEndpoint).Methods("GET").Name("IssuePayCheckByEmployeeID")
 	router.Use(controller.AuthorizationHandler)
 

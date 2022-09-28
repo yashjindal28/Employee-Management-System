@@ -73,3 +73,10 @@ func RequestLeaveByID(employeeLeaveData model.EmployeeLeave) *mongo.UpdateResult
 	result := repository.RequestLeaveByID(employeeLeaveData)
 	return result
 }
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.EmployeeLeave) (result *mongo.UpdateResult, err error) {
+
+	result, err = repository.UpdateEmployeeByIdUnderManager(eid, employee)
+
+	return result, err
+}

@@ -69,3 +69,41 @@ func DeleteEmployeeByID(childEid string) *mongo.DeleteResult {
 
 	return result
 }
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.PayrollData) (result *mongo.UpdateResult, err error) {
+
+	collection := client.Database("payroll_db").Collection("payrollInfo")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	filter := bson.D{{"eid", eid}}
+	update := bson.M{
+		"$set": bson.M{
+			"firstname": employee.Firstname,
+			"lastname":  employee.Lastname,
+			"desg":      employee.Designation,
+			"did":       employee.DepartmentID,
+			"dpt":       employee.Department,
+			"manager":   employee.Manager,
+			"managerID": employee.ManagerID,
+			"salary":    employee.Salary,
+			"email":     employee.Email,
+		},
+	}
+	_, err = collection.UpdateOne(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
+	filter = bson.D{{"managerID", eid}}
+	update = bson.M{
+		"$set": bson.M{
+			"manager": employee.Firstname + " " + employee.Lastname,
+		},
+	}
+	_, err = collection.UpdateMany(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
+	return result, err
+}

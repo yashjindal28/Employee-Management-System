@@ -99,3 +99,36 @@ func RequestLeaveByID(employeeLeaveData model.EmployeeLeave) *mongo.UpdateResult
 	}
 	return result
 }
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.EmployeeLeave) (result *mongo.UpdateResult, err error) {
+
+	collection := client.Database("leave_db").Collection("employeeLeaves")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	filter := bson.D{{"eid", eid}}
+	update := bson.M{
+		"$set": bson.M{
+			"firstname": employee.Firstname,
+			"lastname":  employee.Lastname,
+			"manager":   employee.Manager,
+			"managerID": employee.ManagerID,
+		},
+	}
+	_, err = collection.UpdateOne(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
+	filter = bson.D{{"managerID", eid}}
+	update = bson.M{
+		"$set": bson.M{
+			"manager": employee.Firstname + " " + employee.Lastname,
+		},
+	}
+	_, err = collection.UpdateMany(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
+	return result, err
+}

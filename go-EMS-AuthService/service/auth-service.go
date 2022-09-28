@@ -51,7 +51,7 @@ func GenerateToken(login *model.Login) (*string, error) {
 // 3 Steps --
 // 1) Validity of the token (includes expiry and signature verification)
 // 2) Verify if the role has access to the resource
-// 3) need to verify if the resource being accessd if for the same user
+// 3) need to verify if the resource being accessd is for the same user
 
 func Verify(urlParams map[string]string) error {
 

@@ -22,6 +22,7 @@ func main() {
 	router.HandleFunc("/leave/manager/{eid}", controller.DisplayEmployeeDataEndpoint).Methods("GET").Name("AllEmployeesUnderManagerLeaveData")
 	router.HandleFunc("/leave/manager/{eid}/approve/{childEid}", controller.ApproveLeaveRequestEndpoint).Methods("GET").Name("AprroveLeave")
 	router.HandleFunc("/leave/manager/{eid}/reject/{childEid}", controller.RejectLeaveRequestEndpoint).Methods("GET").Name("RejectLeave")
+	router.HandleFunc("/leave/{eid}/update-employee/{childEid}", controller.EditEmployeeEndpoint).Methods("PUT").Name("UpdateEmployee")
 
 	router.Use(controller.AuthorizationHandler)
 

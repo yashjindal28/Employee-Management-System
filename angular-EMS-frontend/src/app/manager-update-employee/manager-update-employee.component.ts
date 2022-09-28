@@ -30,9 +30,27 @@ export class ManagerUpdateEmployeeComponent implements OnInit {
 
   onSubmit(){
     this.employeeService.updateEmployee(this.eid,this.childEid,this.employee).subscribe(data =>{
-      this.goToEmployeeList();
+      //this.goToEmployeeList();
     }, 
      error => console.log(error))
+
+     this.employeeService.updateEmployeePayroll(this.eid,this.childEid,this.employee).subscribe(data =>{
+      //this.goToEmployeeList();
+    }, 
+     error => console.log(error))
+
+     this.employeeService.updateEmployeeLeave(this.eid,this.childEid,this.employee).subscribe(data =>{
+      //this.goToEmployeeList();
+    }, 
+     error => console.log(error))
+
+     this.employeeService.updateEmployeeDepartment(this.eid,this.childEid,this.employee).subscribe(data =>{
+      //this.goToEmployeeList();
+    }, 
+     error => console.log(error))
+    
+
+     this.goToEmployeeList();
   }
 
   goToEmployeeList(){

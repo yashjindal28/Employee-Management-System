@@ -27,6 +27,17 @@ func UpdateEmployeeByIdUnderManager(eid string, employee model.Employee) (result
 	replacement := employee
 	result, err = collection.ReplaceOne(ctx, filter, replacement)
 
+	filter = bson.D{{"managerID", eid}}
+	update := bson.M{
+		"$set": bson.M{
+			"manager": employee.Firstname + " " + employee.Lastname,
+		},
+	}
+	_, err = collection.UpdateMany(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
 	return result, err
 }
 

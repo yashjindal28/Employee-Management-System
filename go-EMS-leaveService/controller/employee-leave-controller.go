@@ -102,3 +102,20 @@ func RequestLeaveEndpoint(response http.ResponseWriter, request *http.Request) {
 	result := service.RequestLeaveByID(employeeLeaveData)
 	json.NewEncoder(response).Encode(result)
 }
+
+func EditEmployeeEndpoint(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+
+	params := mux.Vars(request)
+	eid := params["childEid"]
+	var employee model.EmployeeLeave
+	json.NewDecoder(request.Body).Decode(&employee)
+
+	result, err := service.UpdateEmployeeByIdUnderManager(eid, employee)
+
+	if err != nil {
+		panic(err)
+	}
+	json.NewEncoder(response).Encode(result)
+
+}
