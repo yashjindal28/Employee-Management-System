@@ -23,6 +23,7 @@ func main() {
 	router.HandleFunc("/department/{eid}/save-project/{did}", controller.SaveProjectEndpoint).Methods("PUT").Name("SaveProjectInADepartment")
 	router.HandleFunc("/department/{eid}/save-employee", controller.SaveEmployeeToAProjectEndpoint).Methods("POST").Name("SaveEmployeeToAProject")
 	router.HandleFunc("/department/{eid}/get-count", controller.GetCountEndpoint).Methods("GET").Name("GetCount")
+	router.HandleFunc("/department/{eid}/update-employee/{childEid}", controller.EditEmployeeEndpoint).Methods("PUT").Name("UpdateEmployee")
 
 	router.Use(controller.AuthorizationHandler)
 

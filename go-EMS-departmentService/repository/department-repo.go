@@ -214,3 +214,31 @@ func GetCount() model.Count {
 
 	return count
 }
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.Employee) (result *mongo.UpdateResult, err error) {
+
+	collection := client.Database("department_db").Collection("departments")
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	change := bson.M{"$set": bson.M{"eiddpt.$.firstname": employee.Firstname, "eiddpt.$.lastname": employee.Lastname, "eiddpt.$.email": employee.Email, "eiddpt.$.desg": employee.Designation}}
+	//change := bson.M{"$set": bson.M{"eiddpt": bson.M{"firstname": employee.Firstname, "lastname": employee.Lastname, "email": employee.Email, "desg": employee.Designation}}}
+	match := bson.M{"did": employee.DepartmentID, "eiddpt.eid": employee.EmployeeID}
+	_, err = collection.UpdateOne(ctx, match, change)
+
+	if err != nil {
+		panic(err)
+	}
+
+	filter := bson.D{{"managerID", eid}}
+	update := bson.M{
+		"$set": bson.M{
+			"manager": employee.Firstname + " " + employee.Lastname,
+		},
+	}
+	_, err = collection.UpdateOne(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
+	if err != nil {
+		panic(err)
+	}
+
+	return result, err
+}

@@ -70,3 +70,10 @@ func GetCount() model.Count {
 
 	return count
 }
+
+func UpdateEmployeeByIdUnderManager(eid string, employee model.Employee) (result *mongo.UpdateResult, err error) {
+
+	result, err = repository.UpdateEmployeeByIdUnderManager(eid, employee)
+
+	return result, err
+}

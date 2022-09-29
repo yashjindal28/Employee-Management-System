@@ -104,3 +104,20 @@ func GetCountEndpoint(response http.ResponseWriter, request *http.Request) {
 
 	json.NewEncoder(response).Encode(count)
 }
+
+func EditEmployeeEndpoint(response http.ResponseWriter, request *http.Request) {
+	response.Header().Add("content-type", "application/json")
+
+	params := mux.Vars(request)
+	eid := params["childEid"]
+	var employee model.Employee
+	json.NewDecoder(request.Body).Decode(&employee)
+
+	result, err := service.UpdateEmployeeByIdUnderManager(eid, employee)
+
+	if err != nil {
+		panic(err)
+	}
+	json.NewEncoder(response).Encode(result)
+
+}
