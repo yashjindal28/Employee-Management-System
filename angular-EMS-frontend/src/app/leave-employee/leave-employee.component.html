@@ -1,23 +1,25 @@
-<h3> Your Leave Data</h3>
+<h3> <b>Your Leave Data</b></h3>
 <div>
     <div>
-        <label> <b> Employee Id: </b></label> {{employeeLeaveData.eid}}
+        <label> <b> Employee Id : </b></label> {{employeeLeaveData.eid}}
     </div>
     <div>
-        <label> <b> Employee Name: </b></label> {{employeeLeaveData.firstname}}  {{employeeLeaveData.lastname}}
+        <label> <b> Employee Name : </b></label> {{employeeLeaveData.firstname}}  {{employeeLeaveData.lastname}}
     </div>
     
     
     <div>
-        <label> <b> Manager: </b></label> {{employeeLeaveData.manager}}
+        <label> <b> Manager : </b></label> {{employeeLeaveData.manager}}
     </div>
     <div>
-        <label> <b> Remaining Leave Balance: </b></label> {{employeeLeaveData.leavesRem}}  
+        <label> <b> Remaining Leave Balance : </b></label> {{employeeLeaveData.leavesRem}}  
     </div>
    
 </div>
 
-<h3>Your Leave History</h3>
+<br>
+<br>
+<h3> <b>Your Leave History </b></h3>
 <table class = "table table-striped">
     <thead>
         <tr>
@@ -53,8 +55,9 @@
         </tr>
     </tbody>
 </table>
-
-<h3>Initiate a Leave Request</h3>
+<br>
+<br>
+<h3><b>Initiate a new leave Request</b></h3>
 <form  (ngSubmit)="onSubmit()">
     <table class = "table table-striped">
         <thead>

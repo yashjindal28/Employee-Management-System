@@ -186,9 +186,30 @@ func SaveEmployeeToAProject(customObj model.CustomObj) {
 
 	collection := client.Database("department_db").Collection("departments")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	//_ = DeleteEmployeeByID(customObj.EmployeeID, customObj.DepartmentID)
+	var department model.Departments
+	err := collection.FindOne(ctx, bson.M{"did": customObj.DepartmentID, "eiddpt.eid": customObj.EmployeeID}).Decode(&department)
+
+	var pid string
+	for _, value := range department.EmployeesOfDpt {
+		if value.EmployeeID == customObj.EmployeeID {
+			pid = value.AssignedToProject
+		}
+	}
+
+	selector := bson.M{"did": customObj.DepartmentID, "projects.pid": pid}
+	update := bson.M{"$pull": bson.M{"projects.$.projectEmployees": bson.M{"eid": customObj.EmployeeID}}}
+	_, err = collection.UpdateOne(ctx, selector, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Deleted previous entries of employee , now updating new ones
+
 	change := bson.M{"$push": bson.M{"projects.$.projectEmployees": bson.M{"eid": customObj.EmployeeID}}}
 	match := bson.M{"did": customObj.DepartmentID, "projects.pid": customObj.ProjectID}
-	_, err := collection.UpdateOne(ctx, match, change)
+	_, err = collection.UpdateOne(ctx, match, change)
 
 	if err != nil {
 		panic(err)

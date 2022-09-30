@@ -1,15 +1,15 @@
 <h3>{{department.dpt}} Department Data</h3>
 <div >
     <div>
-        <label> <b> Department Id: </b></label> {{department.did}}
+        <label> <b> Department Id : </b></label> {{department.did}}
     </div>
     <div>
-        <label> <b> Department Name: </b></label> {{department.dpt}} 
+        <label> <b> Department Name : </b></label> {{department.dpt}} 
     </div>
     
     
     <div >
-        <label> <b> Manager: </b></label> {{department.manager}}
+        <label> <b> Manager : </b></label> {{department.manager}}
     </div>
 </div>
 
@@ -41,7 +41,13 @@
                     {{employee.email}}
                 </td>
                 <td *ngIf="isAssigned(employee.eid) == 'none';else second">
-                    <input type="text"  id = "projectName" name = "projectName">
+                    <!--<input type="text"  id = "projectName" name = "projectName">-->
+                    <label for="projectName">Choose a Project : </label>
+                    <select name="projectName" id="projectName">
+                        <option *ngFor="let project of department.projects" [value]="project.projectName">
+                            {{project.projectName}}
+                          </option> 
+                    </select>
                     <button (click)="onSubmit(employee.eid)" class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
                 </td>
                 <ng-template #second>
@@ -51,6 +57,13 @@
                             Assigned to Project {{project.projectName}}
                         </ng-container>
                     </ng-container>
+
+                    <select name="projectName" id="projectName">
+                        <option *ngFor="let project of department.projects" [value]="project.projectName">
+                            {{project.projectName}}
+                          </option> 
+                    </select>
+                    <button (click)="onSubmit(employee.eid)" class = "btn btn-success" type ="submit" id="btnsubmit">Submit</button>
                 </td>
                 </ng-template>
             </tr>
