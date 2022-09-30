@@ -127,6 +127,7 @@ func UpdateEmployeeByIdUnderManager(eid string, employee model.EmployeeLeave) (r
 	}
 	_, err = collection.UpdateMany(ctx, filter, update) // you can simply replace using replace one command and decoded personalInfo obejct
 	if err != nil {
+
 		panic(err)
 	}
 
